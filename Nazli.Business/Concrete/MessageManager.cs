@@ -26,17 +26,22 @@ namespace Nazli.Business.Concrete
             throw new NotImplementedException();
         }
 
-        public BCResponse Delete(MessageDto dto)
+        public BCResponse Update(MessageDto dto)
+        {
+            throw new NotImplementedException();
+        }
+
+        public BCResponse Delete(int id)
         {
             #region Business
-            if (dto.MessageId <= 0)
+            if (id <= 0)
             {
                 return new BCResponse() { Errors = "hatalı veri" };
             }
             #endregion
             #region Delete
             Message? entity = chatAppContext.Messages.
-                               FirstOrDefault(u => u.MessageId==dto.MessageId);
+                               FirstOrDefault(u => u.MessageId== id);
             
             if (entity != null)
             {
@@ -50,10 +55,7 @@ namespace Nazli.Business.Concrete
 
         }
 
-        public BCResponse Update(MessageDto dto)
-        {
-            throw new NotImplementedException();
-        }
+       
         
         
         public List<Message> GetGroupMessage(int senderId, int groupId)
@@ -70,6 +72,9 @@ namespace Nazli.Business.Concrete
                                  .ToList();
         }
 
-        
+        public Message SendMessage(Message message)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

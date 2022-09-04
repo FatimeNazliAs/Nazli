@@ -128,17 +128,19 @@ namespace Nazli.Business.Concrete
 
         }
 
-        public BCResponse Delete(UserDto dto)
+        public BCResponse Delete(int id)
 
         {
+
+
             #region Business
-            if (dto.UserId <= 0)
+            if (id <= 0)
             {
                 return new BCResponse() { Errors = "hatalı veri" };
             }
             #endregion
             #region Delete
-            User? entity = chatAppContext.Users.FirstOrDefault(u => u.UserId == dto.UserId);
+            User? entity = chatAppContext.Users.FirstOrDefault(u => u.UserId == id);
             if (entity!=null)
             {
                 _dalUser.Delete(entity);

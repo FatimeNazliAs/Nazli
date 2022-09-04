@@ -65,17 +65,17 @@ namespace Nazli.Business.Concrete
             return new BCResponse() { Errors = "Gereklilikler sağlanamadı." };
         }
 
-        public BCResponse Delete(GroupDto dto)
+        public BCResponse Delete(int id)
         {
             #region Business
-            if (dto.GroupId < 0)
+            if (id < 0)
             {
                 return new BCResponse() { Errors = "Boyle bir grup bulunamadı" };
 
             }
             #endregion
             #region Delete
-            Group? entity = chatAppContext.Groups.FirstOrDefault(g => g.GroupId == dto.GroupId);
+            Group? entity = chatAppContext.Groups.FirstOrDefault(g => g.GroupId == id);
 
             if (entity!=null)
             {

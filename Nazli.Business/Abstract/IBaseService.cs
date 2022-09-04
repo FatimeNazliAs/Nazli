@@ -12,6 +12,6 @@ namespace Nazli.Business.Abstract
     {
         BCResponse Add(DTO dto);
         BCResponse Update(DTO dto);
-        BCResponse Delete(DTO dto);
+        BCResponse Delete(int id);
     }
 }

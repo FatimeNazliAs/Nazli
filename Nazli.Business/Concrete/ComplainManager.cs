@@ -2,6 +2,7 @@
 using Nazli.Common.DTOs;
 using Nazli.Common.Utilities.Results;
 using Nazli.DataLayer;
+using Nazli.DataLayer.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,14 +21,33 @@ namespace Nazli.Business.Concrete
             _dalComplain = dalComplain;
         }
 
+        ChatAppContext chatAppContext = new ChatAppContext();
+
         public BCResponse Add(ComplainDto dto)
         {
             throw new NotImplementedException();
         }
 
-        public BCResponse Delete(ComplainDto dto)
+        public BCResponse Delete(int id)
         {
             throw new NotImplementedException();
+        }
+
+        public Complain? GetById(int id)
+        {
+            return chatAppContext.Set<Complain>().FirstOrDefault(x => x.ComplainId == id);
+        }
+
+        public List<Complain> GetComplainByUserID(int id)
+        {
+            return chatAppContext.Set<Complain>().
+                    Where(x => x.ComplainedOfUserId == id).
+                    ToList();
+        }
+
+        public List<Complain> GetListAll()
+        {
+            return chatAppContext.Set<Complain>().ToList();
         }
 
         public BCResponse Update(ComplainDto dto)

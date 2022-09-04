@@ -13,7 +13,7 @@ namespace Nazli.Business.Abstract
         List<Message> GetPrivateMessage(int senderId, int receiverId);
         List<Message> GetGroupMessage(int senderId, int groupId);
 
-
+        Message SendMessage(Message message);
 
     }
 }

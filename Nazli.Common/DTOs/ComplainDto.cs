@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Nazli.Common.DTOs
 {
+
     public class ComplainDto
     {
         public int ComplainId { get; set; }
