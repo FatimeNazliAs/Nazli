@@ -28,14 +28,16 @@ namespace Nazli.DataLayer
 
         }
 
-        public Group? GetBy(int? id = null, int? createrUserId = null, string? name = null)
+        public GroupMember? GetBy(int? id = null, int? groupMemberId = null,int? addedUserId =null)
         {
 
             return chatAppContext.GroupMembers.
                 Where(x =>
                             (!id.HasValue || x.GroupId == id) &&
-                            (!createrUserId.HasValue || x.CreaterUserId == createrUserId) &&
-                            (string.IsNullOrEmpty(name) || x.Name == name)).FirstOrDefault();
+                            (!groupMemberId.HasValue || x.GroupMemberId == groupMemberId) &&
+                            (!addedUserId.HasValue || x.AddedUserId == addedUserId)).FirstOrDefault();
+
+            
 
         }
 

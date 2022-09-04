@@ -13,6 +13,10 @@ namespace Nazli.DataLayer.Entity
         public DateTime AddedDate { get; set; }
         public bool IsAdmin { get; set; }
 
-       
+        public virtual User AddedUser { get; set; } = null!;
+        public virtual Group Group { get; set; } = null!;
+        public virtual User User { get; set; } = null!;
+
+
     }
 }

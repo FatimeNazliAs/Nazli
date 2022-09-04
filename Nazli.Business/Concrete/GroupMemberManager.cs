@@ -23,15 +23,7 @@ namespace Nazli.Business.Concrete
 
         public BCResponse Add(GroupMemberDto dto)
         {
-            #region Business
-            var isExists = _dalGroupMember.Any(addedUserId:dto.AddedUserId);
-            if (isExists)
-            {
-                return new BCResponse() { Errors = "Kisi grupta zaten yer almaktadır." };
-            }
-
-
-
+            throw new NotImplementedException();
 
         }
 
