@@ -39,21 +39,24 @@ namespace Nazli.Business.Concrete
         }
         public BCResponse GetById(int id)
         {
-            return chatAppContext.Set<Complain>().FirstOrDefault(x => x.ComplainId == id);
+            //return chatAppContext.Set<Complain>().FirstOrDefault(x => x.ComplainId == id);
+            throw new NotImplementedException();
         }
 
         public BCResponse GetComplainByUserID(int id)
         {
-            return chatAppContext.Set<Complain>().
-                    Where(x => x.ComplainedOfUserId == id).
-                    ToList();
+            //return chatAppContext.Set<Complain>().
+            //        Where(x => x.ComplainedOfUserId == id).
+            //        ToList();
+            throw new NotImplementedException();
         }
 
         public BCResponse GetListAll()
         {
-            return chatAppContext.Set<Complain>().ToList();
+            //return chatAppContext.Set<Complain>().ToList();
+            throw new NotImplementedException();
         }
 
-       
+
     }
 }

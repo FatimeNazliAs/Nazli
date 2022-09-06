@@ -23,7 +23,6 @@ namespace Nazli.DataLayer
 
             return chatAppContext.Set<User>().ToList();
 
-
         }
 
         public User? GetByUserName(string username)

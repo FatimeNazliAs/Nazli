@@ -9,8 +9,8 @@ namespace Nazli.Common.DTOs
     public class FriendDto
     {
         public int FriendId { get; set; }
-        public int RequesterUserId { get; set; }
-        public int RequestedUserId { get; set; }
+        public int RequesterUserId { get; set; } //istek gönderen
+        public int RequestedUserId { get; set; } //istek kabul eden
         public byte FriendStatusId { get; set; }
         public DateTime RequestedDate { get; set; }
      

@@ -6,16 +6,12 @@ using Nazli.Common.DTOs;
 
 namespace Nazli.API.Controllers
 {
-    [Route("Users")]
+   
     [ApiController]
+    [Route("User")]
     public class UsersController : ControllerBase
     {
-        //IUserService _userService;
 
-        //public UsersController(IUserService userService)
-        //{
-        //    _userService = userService;
-        //}
         UserManager _userManager;
 
         public UsersController(UserManager userManager)
@@ -23,51 +19,25 @@ namespace Nazli.API.Controllers
             _userManager = userManager;
         }
 
-        [HttpPost("Add")]
 
-        public IActionResult Add([FromBody] UserDto dto)
+        [HttpPost]
+
+        public IActionResult Add([FromBody] UserDto user)
         {
-            var result = _userManager.Add(dto);
+            var result = _userManager.Add(user);
             if (result.Errors != null)
             {
-                return NotFound(result.Value);
+                return BadRequest(result.Errors);
 
             }
-            return NotFound(result.Errors);
+            return Ok(result.Value);
         }
 
-        [Route("Update")]
         [HttpPut]
 
-        public IActionResult Update([FromBody] UserDto dto)
+        public IActionResult Update([FromBody] UserDto user)//? var zorunlu değil 
         {
-            var result = _userManager.Update(dto);
-            if (result.Errors != null)
-            {
-                return NotFound(result.Value);
-
-            }
-            return NotFound(result.Errors);
-        }
-
-        //[HttpDelete("Delete")]
-        //public IActionResult Delete([FromBody] UserDto dto)
-        //{
-        //    var result = _userManager.Delete(dto);
-        //    if (result.Errors != null)
-        //    {
-        //        return NotFound(result.Value);
-
-        //    }
-        //    return NotFound(result.Errors);
-        //}
-
-
-        [HttpDelete("Delete")]
-
-        public IActionResult Delete(int userId)
-        {
-            var result = _userManager.Delete(userId);
+            var result = _userManager.Update(user);
             if (result.Errors != null)
             {
                 return NotFound(result.Errors);
@@ -76,6 +46,59 @@ namespace Nazli.API.Controllers
             return Ok(result.Value);
         }
 
+        [HttpDelete]
+
+        public IActionResult Delete(int userid)
+        {
+            var result = _userManager.Delete(userid);
+            if (result.Errors != null)
+            {
+                return NotFound(result.Errors);
+
+            }
+            return Ok(result.Value);
+        }
+
+        [HttpGet("{userID}")]
+
+        public IActionResult GetById(int userId)
+        {
+            var result = _userManager.GetById(userId);
+            if (result.Errors != null)
+            {
+                return NotFound(result.Errors);
+
+            }
+            return Ok(result.Value);
+        }
+
+        [HttpGet("username/{username}")]
+
+        public IActionResult GetByUserName(string userName)
+        {
+            var result = _userManager.GetByUserName(userName);
+            if (result.Errors != null)
+            {
+                return NotFound(result.Errors);
+
+            }
+            return Ok(result.Value);
+        }
+
+
+        [Route("/Users")]
+        [HttpGet()]
+
+        public IActionResult GetUsers()
+        {
+            var result = _userManager.GetUsers();
+            if (result.Errors != null)
+            {
+                return NotFound(result.Errors);
+
+            }
+            return Ok(result.Value);
+        }
 
 
     }

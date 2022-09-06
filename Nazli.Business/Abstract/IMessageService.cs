@@ -19,6 +19,6 @@ namespace Nazli.Business.Abstract
         BCResponse GetPrivateMessage(int senderId, int receiverId);
         BCResponse GetGroupMessage(int senderId, int groupId);
 
-        BCResponse SendMessage(Message message);
+        BCResponse SendMessage(MessageDto message);
     }
 }

@@ -9,5 +9,8 @@ namespace Nazli.Business.Concrete
 {
     public class ComplainStatusManager:IComplainStatusService
     {
+
+
+
     }
 }

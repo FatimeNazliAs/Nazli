@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Nazli.Business.Abstract;
+using Nazli.Business.Concrete;
 
 namespace Nazli.API.Controllers
 {
@@ -8,11 +9,11 @@ namespace Nazli.API.Controllers
     [ApiController]
     public class GroupsController : ControllerBase
     {
-        IGroupService _groupService;
+        GroupManager _groupManager;
 
-        public GroupsController(IGroupService groupService)
+        public GroupsController(GroupManager groupManager)
         {
-            _groupService = groupService;
+            _groupManager = groupManager;
         }
     }
 }

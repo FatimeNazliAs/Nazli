@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Nazli.Business.Abstract;
+using Nazli.Business.Concrete;
 
 namespace Nazli.API.Controllers
 {
@@ -8,11 +9,29 @@ namespace Nazli.API.Controllers
     [ApiController]
     public class FriendsController : ControllerBase
     {
-        IFriendService _friendService;
+        FriendManager _friendManager;
 
-        public FriendsController(IFriendService friendService)
+        public FriendsController(FriendManager friendManager)
         {
-            _friendService = friendService;
+            _friendManager = friendManager;
         }
+   
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     }
 }

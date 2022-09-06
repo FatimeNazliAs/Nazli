@@ -128,9 +128,10 @@ namespace Nazli.Business.Concrete
 
         public BCResponse GetList(int id)
         {
-            return chatAppContext.Set<Group>()
-                                 .Where(x => x.GroupId == id)
-                                 .ToList();
+            throw new NotImplementedException();
+            //return chatAppContext.Set<Group>()
+            //                     .Where(x => x.GroupId == id)
+            //                     .ToList();
         }
     
     

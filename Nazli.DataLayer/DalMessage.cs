@@ -43,7 +43,7 @@ namespace Nazli.DataLayer
                             (!receiverId.HasValue || x.ReceiverId== receiverId)&&
                             (!messageReferenceId.HasValue || x.MessageReferenceId == messageReferenceId));
 
-            //(string.IsNullOrEmpty(userName) || x.Username == userName)
+        
 
 
         }

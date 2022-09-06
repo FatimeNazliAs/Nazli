@@ -173,7 +173,7 @@ namespace Nazli.Business.Concrete
                 return new BCResponse() { Value=result };
 
             }
-            return new BCResponse() { Errors = "Kullanıcı bulunamadı" };
+            return new BCResponse() { Errors = "Bu id'ye ait kullanıcı bulunamadı" };
 
 
 
@@ -182,13 +182,13 @@ namespace Nazli.Business.Concrete
         public BCResponse GetByUserName(string username)
         {
 
-            var result = _dalUser.GetBy(userName:username);
+            var result = _dalUser.GetByUserName(username);
             if (result != null)
             {
                 return new BCResponse() { Value = result };
 
             }
-            return new BCResponse() { Errors = "Bu Kullanıcı ismine ait kullanıcı bulunamadı" };
+            return new BCResponse() { Errors = "Bu kullanıcı ismine ait kullanıcı bulunamadı" };
         }
 
 

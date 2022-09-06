@@ -89,7 +89,8 @@ namespace Nazli.Business.Concrete
 
         public BCResponse GetListAll()
         {
-            return chatAppContext.Set<GroupMember>().ToList();
+            throw new NotImplementedException();
+            //return chatAppContext.Set<GroupMember>().ToList();
 
         }
     }

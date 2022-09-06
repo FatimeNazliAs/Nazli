@@ -19,7 +19,7 @@ namespace Nazli.Common.DTOs
         public DateTime SendDate { get; set; }
         public DateTime ReadDate { get; set; }
 
-        public virtual Group? Group { get; set; }
+        
   
     }
 }

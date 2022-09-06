@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
+
 namespace Nazli.DataLayer.Entity
 {
     public partial class ChatAppContext : DbContext
