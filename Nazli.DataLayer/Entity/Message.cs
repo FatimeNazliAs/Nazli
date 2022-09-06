@@ -8,6 +8,7 @@ namespace Nazli.DataLayer.Entity
     {
         public int MessageId { get; set; }
         public int SenderId { get; set; }
+        public int MessageReferenceId { get; set; }
         public int? ReceiverId { get; set; }
         public int? GroupId { get; set; }
         public string MessageContent { get; set; } = null!;

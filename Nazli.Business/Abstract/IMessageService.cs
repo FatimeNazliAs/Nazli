@@ -1,4 +1,5 @@
 ﻿using Nazli.Common.DTOs;
+using Nazli.Common.Utilities.Results;
 using Nazli.DataLayer.Entity;
 using System;
 using System.Collections.Generic;
@@ -10,10 +11,14 @@ namespace Nazli.Business.Abstract
 {
     public interface IMessageService: IBaseService<MessageDto>
     {
-        List<Message> GetPrivateMessage(int senderId, int receiverId);
-        List<Message> GetGroupMessage(int senderId, int groupId);
+        //List<Message> GetPrivateMessage(int senderId, int receiverId);
+        //List<Message> GetGroupMessage(int senderId, int groupId);
 
-        Message SendMessage(Message message);
+        //Message SendMessage(Message message);
 
+        BCResponse GetPrivateMessage(int senderId, int receiverId);
+        BCResponse GetGroupMessage(int senderId, int groupId);
+
+        BCResponse SendMessage(Message message);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Nazli.Common.DTOs;
+using Nazli.Common.Utilities.Results;
 using Nazli.DataLayer.Entity;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ namespace Nazli.Business.Abstract
 {
     public interface IGroupMemberService : IBaseService<GroupMemberDto>
     {
-        List<GroupMember> GetListAll();
-
+        //List<GroupMember> GetListAll();
+        BCResponse GetListAll();
     }
 }

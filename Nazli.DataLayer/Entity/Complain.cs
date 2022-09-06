@@ -15,5 +15,6 @@ namespace Nazli.DataLayer.Entity
         public virtual ComplainStatus ComplainStatus { get; set; } = null!;
         public virtual User ComplainantUser { get; set; } = null!;
         public virtual User ComplainedOfUser { get; set; } = null!;
+      
     }
 }

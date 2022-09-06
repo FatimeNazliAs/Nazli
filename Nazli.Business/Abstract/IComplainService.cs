@@ -11,10 +11,13 @@ namespace Nazli.Business.Abstract
 {
     public interface IComplainService: IBaseService<ComplainDto>
     {
-        Complain? GetById(int id);
-        List<Complain> GetListAll();
-        List<Complain> GetComplainByUserID(int id);
+        //Complain? GetById(int id);
+        //List<Complain> GetListAll();
+        //List<Complain> GetComplainByUserID(int id);
 
+        BCResponse GetById(int id);
+        BCResponse GetListAll();
+        BCResponse GetComplainByUserID(int id);
 
 
     }

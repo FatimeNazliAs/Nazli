@@ -58,23 +58,40 @@ namespace Nazli.Business.Concrete
        
         
         
-        public List<Message> GetGroupMessage(int senderId, int groupId)
+        public BCResponse GetGroupMessage(int SenderId, int GroupId)
         {
-            return chatAppContext.Set<Message>()
-                               .Where(m => m.SenderId == senderId && m.GroupId == groupId)
-                               .ToList();
+            var groupResult = _dalMessage.GetBy(groupId: GroupId);
+            var senderResult = _dalMessage.GetBy(senderId: SenderId);
+
+
+            if ( groupResult != null && senderResult != null)
+            {
+                return new BCResponse() { Value = senderResult };
+            }
+            return new BCResponse() { Errors = "Group Mesajı alınamadı" };
         }
 
-        public List<Message> GetPrivateMessage(int senderId, int receiverId)
+        public BCResponse GetPrivateMessage(int SenderId, int ReceiverId)
         {
-            return chatAppContext.Set<Message>()
-                                 .Where(m => m.SenderId == senderId && m.ReceiverId == receiverId)
-                                 .ToList();
+            var senderResult = _dalMessage.GetBy(senderId: SenderId);
+            var receiverResult = _dalMessage.GetBy(receiverId: ReceiverId);
+            
+
+            if ((senderResult != null && receiverResult == null) || (senderResult != null && receiverResult != null))
+            {
+                return new BCResponse() { Value = senderResult };
+            }
+            return new BCResponse() { Errors = "Gizli Mesaj alınamadı" };
         }
 
-        public Message SendMessage(Message message)
+        
+        public BCResponse SendMessage(Message message)
         {
-            throw new NotImplementedException();
+         
+           
+       
+        
+        
         }
     }
 }

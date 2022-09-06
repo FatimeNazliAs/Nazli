@@ -153,22 +153,42 @@ namespace Nazli.Business.Concrete
         }
 
         
-        public List<User> GetUsers()
+        public BCResponse GetUsers()
         {
-            return chatAppContext.Set<User>().ToList();
+            var result = _dalUser.GetUsers();
+            if (result != null)
+            {
+                return new BCResponse() { Value = result };
+
+            }
+            return new BCResponse() { Errors = "Kullanıcılar bulunamadı" };
 
         }
 
-        public User? GetById(int id)
+        public BCResponse GetById(int id)
         {
+            var result = _dalUser.GetById(id);
+            if (result!=null)
+            {
+                return new BCResponse() { Value=result };
 
-            return chatAppContext.Set<User>().FirstOrDefault(x => x.UserId == id);
+            }
+            return new BCResponse() { Errors = "Kullanıcı bulunamadı" };
+
+
+
         }
 
-        public User? GetByUserName(string username)
+        public BCResponse GetByUserName(string username)
         {
 
-            return chatAppContext.Set<User>().FirstOrDefault(x => x.Username == username);
+            var result = _dalUser.GetBy(userName:username);
+            if (result != null)
+            {
+                return new BCResponse() { Value = result };
+
+            }
+            return new BCResponse() { Errors = "Bu Kullanıcı ismine ait kullanıcı bulunamadı" };
         }
 
 

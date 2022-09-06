@@ -1,4 +1,5 @@
 ﻿using Nazli.Common.DTOs;
+using Nazli.Common.Utilities.Results;
 using Nazli.DataLayer.Entity;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,7 @@ namespace Nazli.Business.Abstract
 {
     public interface IFriendService : IBaseService<FriendDto>
     {
-        List<Friend> GetList(int id);
+        //List<Friend> GetList(int id);
+        BCResponse GetList(int id);
     }
 }

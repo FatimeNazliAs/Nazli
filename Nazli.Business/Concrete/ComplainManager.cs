@@ -33,26 +33,27 @@ namespace Nazli.Business.Concrete
             throw new NotImplementedException();
         }
 
-        public Complain? GetById(int id)
+        public BCResponse Update(ComplainDto dto)
+        {
+            throw new NotImplementedException();
+        }
+        public BCResponse GetById(int id)
         {
             return chatAppContext.Set<Complain>().FirstOrDefault(x => x.ComplainId == id);
         }
 
-        public List<Complain> GetComplainByUserID(int id)
+        public BCResponse GetComplainByUserID(int id)
         {
             return chatAppContext.Set<Complain>().
                     Where(x => x.ComplainedOfUserId == id).
                     ToList();
         }
 
-        public List<Complain> GetListAll()
+        public BCResponse GetListAll()
         {
             return chatAppContext.Set<Complain>().ToList();
         }
 
-        public BCResponse Update(ComplainDto dto)
-        {
-            throw new NotImplementedException();
-        }
+       
     }
 }

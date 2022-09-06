@@ -11,9 +11,11 @@ namespace Nazli.Business.Abstract
 {
     public interface IUserService: IBaseService<UserDto>
     {
-        List<User> GetUsers();
-        User? GetById(int id);
-        User? GetByUserName(string username);
-
+        //List<User> GetUsers();
+        //User? GetById(int id);
+        //User? GetByUserName(string username);
+        BCResponse GetUsers();
+        BCResponse GetById(int id);
+        BCResponse GetByUserName(string username);
     }
 }

@@ -126,7 +126,7 @@ namespace Nazli.Business.Concrete
 
         }
 
-        public List<Group> GetList(int id)
+        public BCResponse GetList(int id)
         {
             return chatAppContext.Set<Group>()
                                  .Where(x => x.GroupId == id)
