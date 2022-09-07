@@ -12,6 +12,6 @@ namespace Nazli.Business.Abstract
     public interface IGroupService : IBaseService<GroupDto>
     {
         //List<Group> GetList(int id);
-        BCResponse GetList(int id);
+        BCResponse GetById(int id);
     }
 }

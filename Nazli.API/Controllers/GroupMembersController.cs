@@ -1,11 +1,14 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Nazli.Business.Abstract;
 using Nazli.Business.Concrete;
+using Nazli.Common.DTOs;
+using Nazli.DataLayer.Entity;
 
 namespace Nazli.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("GroupMember")]
     [ApiController]
     public class GroupMembersController : ControllerBase
     {
@@ -14,6 +17,53 @@ namespace Nazli.API.Controllers
         public GroupMembersController(GroupMemberManager groupMemberManager)
         {
             _groupMemberManager = groupMemberManager;
+        }
+
+        [HttpPost]
+        public IActionResult Add([FromBody] GroupMemberDto groupMember)
+        {
+            var result = _groupMemberManager.Add(groupMember);
+            if (result.Errors != null)
+            {
+                return BadRequest(result.Errors);
+
+            }
+            return Ok(result.Value);
+        }
+
+        [HttpPut]
+        public IActionResult Update([FromBody] GroupMemberDto groupMember)
+        {
+            var result = _groupMemberManager.Update(groupMember);
+            if (result.Errors != null)
+            {
+                return BadRequest(result.Errors);
+
+            }
+            return Ok(result.Value);
+        }
+        [HttpDelete]
+        public IActionResult Delete(int groupId)
+        {
+            var result = _groupMemberManager.Delete(groupId);
+            if (result.Errors != null)
+            {
+                return BadRequest(result.Errors);
+
+            }
+            return Ok(result.Value);
+        }
+
+        [HttpGet]
+        public IActionResult GetById(int groupId)
+        {
+            var result = _groupMemberManager.GetById(groupId);
+            if (result.Errors != null)
+            {
+                return BadRequest(result.Errors);
+
+            }
+            return Ok(result.Value);
         }
     }
 }

@@ -34,5 +34,32 @@ namespace Nazli.DataLayer
 
         }
 
+        public bool Any(int? complainId = null, int? complainantUserId=null,int? complainedOfUserId=null,int? complainStatusId=null)
+        {
+
+            return chatAppContext.Complains.
+                Any(x =>
+                            (!complainId.HasValue || x.ComplainId == complainId) &&
+                            (!complainedOfUserId.HasValue || x.ComplainedOfUserId== complainedOfUserId)&&
+                            (!complainantUserId.HasValue || x.ComplainantUserId == complainantUserId)&&
+                            (!complainStatusId.HasValue || x.ComplainStatusId == complainStatusId));
+                        //  (string.IsNullOrEmpty(userName) || x.Username == userName)
+
+
+        }
+
+        public Complain? GetBy(int? complainId = null, int? complainantUserId = null, int? complainedOfUserId = null, int? complainStatusId = null)
+        {
+
+            return chatAppContext.Complains.
+                Where(x =>
+                            (!complainId.HasValue || x.ComplainId == complainId) &&
+                            (!complainedOfUserId.HasValue || x.ComplainedOfUserId == complainedOfUserId) &&
+                            (!complainantUserId.HasValue || x.ComplainantUserId == complainantUserId)&&
+                            (!complainStatusId.HasValue || x.ComplainStatusId == complainStatusId)
+                            ).FirstOrDefault();
+
+        }
+
     }
 }

@@ -12,6 +12,6 @@ namespace Nazli.Business.Abstract
     public interface IFriendService : IBaseService<FriendDto>
     {
         //List<Friend> GetList(int id);
-        BCResponse GetList(int id);
+        BCResponse GetById(int id);
     }
 }

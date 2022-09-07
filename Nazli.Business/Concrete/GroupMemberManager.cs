@@ -87,7 +87,7 @@ namespace Nazli.Business.Concrete
 
         }
 
-        public BCResponse GetListAll()
+        public BCResponse GetById(int id)
         {
             throw new NotImplementedException();
             //return chatAppContext.Set<GroupMember>().ToList();

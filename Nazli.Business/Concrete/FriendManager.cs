@@ -121,7 +121,7 @@ namespace Nazli.Business.Concrete
 
         }
 
-        public BCResponse GetList(int id)
+        public BCResponse GetById(int id)
         {
             throw new NotImplementedException();
             //return chatAppContext.Set<Friend>()

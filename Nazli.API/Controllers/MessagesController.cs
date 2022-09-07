@@ -9,7 +9,7 @@ using System;
 
 namespace Nazli.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("Message")]
     [ApiController]
     public class MessagesController : ControllerBase
     {
