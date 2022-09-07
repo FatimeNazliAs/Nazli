@@ -21,7 +21,7 @@ namespace Nazli.API.Controllers
         }
 
 
-        [HttpPost]
+        [HttpPost("SendMessage")]
 
         public IActionResult SendMessage([FromBody] MessageDto message)
         {
@@ -35,7 +35,7 @@ namespace Nazli.API.Controllers
         }
 
         
-        [HttpDelete]
+        [HttpDelete("Delete")]
 
         public IActionResult Delete(int messageId)
         {
@@ -48,30 +48,31 @@ namespace Nazli.API.Controllers
             return Ok(result.Value);
         }
 
-        //[HttpGet()] //URL EKLE
-        //public IActionResult GetPrivateMessage(int senderId,int receiverId)
-        //{
-        //    var result = _messageManager.GetPrivateMessage(senderId,  receiverId);
-        //    if (result.Errors != null)
-        //    {
-        //        return BadRequest(result.Errors);
+        [HttpGet("user/{senderId}/groupchat/{receiverId}")] //URL EKLE
+        public IActionResult GetPrivateMessage(int senderId, int receiverId)
+        {
+            var result = _messageManager.GetPrivateMessage(senderId, receiverId);
+            if (result.Errors != null)
+            {
+                return BadRequest(result.Errors);
 
-        //    }
-        //    return Ok(result.Value);
+            }
+            return Ok(result.Value);
 
-        //}
-        //[HttpGet] //URL EKLE
-        //public IActionResult GetGroupMessage(int senderId, int groupId)
-        //{
-        //    var result = _messageManager.GetPrivateMessage(senderId, groupId);
-        //    if (result.Errors != null)
-        //    {
-        //        return BadRequest(result.Errors);
+        }
+        
+        [HttpGet("user/{senderID}/groupchat/{groupID}")] //URL EKLE
+        public IActionResult GetGroupMessage(int senderId, int groupId)
+        {
+            var result = _messageManager.GetPrivateMessage(senderId, groupId);
+            if (result.Errors != null)
+            {
+                return BadRequest(result.Errors);
 
-        //    }
-        //    return Ok(result.Value);
+            }
+            return Ok(result.Value);
 
-        //}
+        }
 
 
     }

@@ -52,41 +52,41 @@ namespace Nazli.API.Controllers
             return Ok(result.Errors);
         }
 
-        //[HttpGet("{id}")]
-        //public IActionResult GetById(int id)
-        //{
-        //    var result = _complainManager.GetById(id);
-        //    if (result.Errors != null)
-        //    {
-        //        return NotFound(result.Errors);
+        [HttpGet("{id}")]
+        public IActionResult GetById(int id)
+        {
+            var result = _complainManager.GetById(id);
+            if (result.Errors != null)
+            {
+                return NotFound(result.Errors);
 
-        //    }
-        //    return Ok(result.Value);
-        //}
+            }
+            return Ok(result.Value);
+        }
 
 
-        //[HttpGet]
-        //public IActionResult GetListAll()
-        //{
-        //    var result = _complainManager.GetListAll();
-        //    if (result.Errors != null)
-        //    {
-        //        return NotFound(result.Errors);
+        [HttpGet]
+        public IActionResult GetListAll()
+        {
+            var result = _complainManager.GetListAll();
+            if (result.Errors != null)
+            {
+                return NotFound(result.Errors);
 
-        //    }
-        //    return Ok(result.Value);
-        //}
+            }
+            return Ok(result.Value);
+        }
 
-        //[HttpGet("{id}")]
-        //public IActionResult GetComplainByUserID(int id)
-        //{
-        //    var result = _complainManager.GetComplainByUserID(id);
-        //    if (result.Errors != null)
-        //    {
-        //        return NotFound(result.Errors);
+        [HttpGet("getcomplainbyuserıd/{id}")]
+        public IActionResult GetComplainByUserID(int id)
+        {
+            var result = _complainManager.GetComplainByUserID(id);
+            if (result.Errors != null)
+            {
+                return NotFound(result.Errors);
 
-        //    }
-        //    return Ok(result.Value);
-        //}
+            }
+            return Ok(result.Value);
+        }
     }
 }

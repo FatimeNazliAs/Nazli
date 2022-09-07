@@ -20,7 +20,7 @@ namespace Nazli.API.Controllers
         }
 
 
-        [HttpPost]
+        [HttpPost("Add")]
 
         public IActionResult Add([FromBody] UserDto user)
         {
@@ -33,7 +33,7 @@ namespace Nazli.API.Controllers
             return Ok(result.Value);
         }
 
-        [HttpPut]
+        [HttpPut("Update")]
 
         public IActionResult Update([FromBody] UserDto user)//? var zorunlu değil 
         {
@@ -46,7 +46,7 @@ namespace Nazli.API.Controllers
             return Ok(result.Value);
         }
 
-        [HttpDelete]
+        [HttpDelete("Delete")]
 
         public IActionResult Delete(int userid)
         {
@@ -59,7 +59,7 @@ namespace Nazli.API.Controllers
             return Ok(result.Value);
         }
 
-        [HttpGet("{userID}")]
+        [HttpGet("GetById/{userId}")]
 
         public IActionResult GetById(int userId)
         {
@@ -72,7 +72,7 @@ namespace Nazli.API.Controllers
             return Ok(result.Value);
         }
 
-        [HttpGet("username/{username}")]
+        [HttpGet("GetByUserName/{username}")]
 
         public IActionResult GetByUserName(string userName)
         {
@@ -86,9 +86,9 @@ namespace Nazli.API.Controllers
         }
 
 
-        [Route("/Users")]
+        [Route("/Users/GetUsers")]
         [HttpGet()]
-
+        //URL EKLE
         public IActionResult GetUsers()
         {
             var result = _userManager.GetUsers();

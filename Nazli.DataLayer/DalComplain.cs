@@ -61,5 +61,15 @@ namespace Nazli.DataLayer
 
         }
 
+
+        public bool FindMessage(int? messageId = null)
+        {
+
+            return chatAppContext.Messages.
+                Any(x =>
+                            (!messageId.HasValue || x.MessageId == messageId));
+                           
+        }
+
     }
 }

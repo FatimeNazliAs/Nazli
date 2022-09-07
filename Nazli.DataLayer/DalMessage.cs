@@ -43,7 +43,6 @@ namespace Nazli.DataLayer
                             (!receiverId.HasValue || x.ReceiverId== receiverId)&&
                             (!messageReferenceId.HasValue || x.MessageReferenceId == messageReferenceId));
 
-        
 
 
         }

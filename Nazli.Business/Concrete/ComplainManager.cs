@@ -14,10 +14,10 @@ namespace Nazli.Business.Concrete
 {
     public class ComplainManager : IComplainService
     {
+
+
         DalComplain _dalComplain;
-
-
-
+     
         public ComplainManager(DalComplain dalComplain)
         {
             _dalComplain = dalComplain;
@@ -29,27 +29,36 @@ namespace Nazli.Business.Concrete
 
         public BCResponse Add(ComplainDto dto)
         {
-            #region Business
 
-            var isExists = _dalComplain.Any(complainedOfUserId: dto.ComplainedOfUserId);
-            if (isExists == false)
+      
+            #region Business
+            
+            var isExists = _dalComplain.FindMessage(messageId: dto.MessageReferenceId);
+            if (!isExists)
             {
-                return new BCResponse() { Errors = "Sikayet edilen kişi bulunamadı" };
+                return new BCResponse() { Errors = "Mesajlaşma yoktur." };
+
+            }
+
+            isExists = _dalComplain.Any(complainedOfUserId: dto.ComplainedOfUserId);
+            if (isExists)
+            {
+                return new BCResponse() { Errors = "Sikayet edilen kişi sistemde kayıtlıdır." };
 
             }
              isExists = _dalComplain.Any(complainantUserId: dto.ComplainantUserId);
-            if (isExists == false)
+            if (isExists )
             {
-                return new BCResponse() { Errors = "Sikayetçi kişi bulunamadı" };
+                return new BCResponse() { Errors = "Sikayetçi kişi sistemde kayıtlıdır." };
 
             }
             isExists = _dalComplain.Any(complainStatusId: dto.ComplainStatusId);
-            if (isExists==false)
+            if (isExists)
             {
-                return new BCResponse() { Errors = "Sikayet edilme nedeni bulunamadı" };
-
+                return new BCResponse() { Errors = "Sikayet edilme nedeni sistemde kayıtlıdır." };
             }
             #endregion
+            
             #region Map To Entity
             Complain entity = new Complain();
             entity.ComplainantUserId = dto.ComplainantUserId;
@@ -57,6 +66,8 @@ namespace Nazli.Business.Concrete
             entity.ComplainedOfUserId=dto.ComplainedOfUserId;
             entity.ComplainDate=dto.ComplainDate;
             #endregion
+           
+            
             #region Add
             var result = _dalComplain.Add(entity);
             if (result>0)

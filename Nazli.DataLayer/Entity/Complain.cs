@@ -9,6 +9,7 @@ namespace Nazli.DataLayer.Entity
         public int ComplainId { get; set; }
         public int ComplainantUserId { get; set; }
         public int ComplainedOfUserId { get; set; }
+        public int MessageReferenceId { get; set; }
         public byte ComplainStatusId { get; set; }
         public DateTime ComplainDate { get; set; }
 
