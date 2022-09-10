@@ -17,7 +17,7 @@ namespace Nazli.API.Controllers
             _friendManager = friendManager;
         }
 
-        [HttpPost]
+        [HttpPost("Add")]
         public IActionResult Add([FromBody]  FriendDto friend)
         {
             var result = _friendManager.Add(friend);
@@ -29,7 +29,7 @@ namespace Nazli.API.Controllers
             return Ok(result.Value);
         }
 
-        [HttpPut]
+        [HttpPut("Update")]
         public IActionResult Update([FromBody] FriendDto friend)
         {
             var result = _friendManager.Update(friend);
@@ -41,8 +41,8 @@ namespace Nazli.API.Controllers
             return Ok(result.Value);
         }
 
-        [HttpDelete]
-        public IActionResult Add(int id)
+        [HttpDelete("Delete")]
+        public IActionResult Delete(int id)
         {
             var result = _friendManager.Delete(id);
             if (result.Errors != null)
@@ -53,7 +53,7 @@ namespace Nazli.API.Controllers
             return Ok(result.Value);
         }
 
-        [HttpGet]
+        [HttpGet("GetById/{friendId}")]
         public IActionResult GetById(int id)
         {
             var result = _friendManager.GetById(id);

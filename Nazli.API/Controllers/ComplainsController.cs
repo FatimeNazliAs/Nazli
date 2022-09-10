@@ -17,7 +17,7 @@ namespace Nazli.API.Controllers
             _complainManager = complainManager;
         }
 
-        [HttpPost]
+        [HttpPost("Add")]
         public IActionResult Add([FromBody] ComplainDto dto)
         {
             var result = _complainManager.Add(dto);
@@ -28,7 +28,7 @@ namespace Nazli.API.Controllers
             }
             return Ok(result.Errors);
         }
-        [HttpDelete]
+        [HttpDelete("Delete")]
         public IActionResult Delete(int id)
         {
             var result = _complainManager.Delete(id);
@@ -40,7 +40,7 @@ namespace Nazli.API.Controllers
             return Ok(result.Errors);
         }
 
-        [HttpPut]
+        [HttpPut("Update")]
         public IActionResult Update([FromBody] ComplainDto dto)
         {
             var result = _complainManager.Update(dto);
@@ -52,7 +52,7 @@ namespace Nazli.API.Controllers
             return Ok(result.Errors);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("GetById/{id}")]
         public IActionResult GetById(int id)
         {
             var result = _complainManager.GetById(id);
@@ -65,7 +65,7 @@ namespace Nazli.API.Controllers
         }
 
 
-        [HttpGet]
+        [HttpGet("GetListAll")]
         public IActionResult GetListAll()
         {
             var result = _complainManager.GetListAll();

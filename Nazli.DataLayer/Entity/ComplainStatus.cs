@@ -1,10 +1,9 @@
-﻿using Nazli.Common.DataLayer.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace Nazli.DataLayer.Entity
 {
-    public partial class ComplainStatus 
+    public partial class ComplainStatus
     {
         public ComplainStatus()
         {

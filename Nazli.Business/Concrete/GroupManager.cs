@@ -30,12 +30,7 @@ namespace Nazli.Business.Concrete
                 return new BCResponse() { Errors = "Boyle bir grup bulunmaktadır" };
 
             }
-            isExists = _dalGroup.Any(name: dto.Name);
-            if (isExists)
-            {
-                return new BCResponse() { Errors = "Boyle bir grup ismi bulunmaktadır" };
-
-            }
+         
 
             #endregion
 
@@ -67,12 +62,14 @@ namespace Nazli.Business.Concrete
 
         public BCResponse Delete(int id)
         {
+      
             #region Business
             if (id < 0)
             {
                 return new BCResponse() { Errors = "Boyle bir grup bulunamadı" };
 
             }
+            
             #endregion
             #region Delete
             Group? entity = chatAppContext.Groups.FirstOrDefault(g => g.GroupId == id);
@@ -102,7 +99,7 @@ namespace Nazli.Business.Concrete
             }
             #endregion
             #region Map To Entity
-            Group? entity=_dalGroup.GetBy(id:dto.GroupId);
+            Group? entity=_dalGroup.GetById(id:dto.GroupId);
             if (entity==null)
             {
                 return new BCResponse() { Errors = "Group bulunamadı" };
@@ -128,10 +125,14 @@ namespace Nazli.Business.Concrete
 
         public BCResponse GetById(int id)
         {
-            throw new NotImplementedException();
-            //return chatAppContext.Set<Group>()
-            //                     .Where(x => x.GroupId == id)
-            //                     .ToList();
+            var result = _dalGroup.GetById(id);
+
+            if (result != null)
+            {
+                return new BCResponse() { Value = result };
+            }
+
+            return new BCResponse() { Errors = "Kullanıcı Bulunamadı" };
         }
     
     

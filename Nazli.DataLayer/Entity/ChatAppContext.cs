@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-
 namespace Nazli.DataLayer.Entity
 {
     public partial class ChatAppContext : DbContext
@@ -30,11 +29,10 @@ namespace Nazli.DataLayer.Entity
         {
             if (!optionsBuilder.IsConfigured)
             {
-
-                optionsBuilder.UseSqlServer("Server=.;Database=ChatApp;Trusted_Connection=True;");
+//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+                optionsBuilder.UseSqlServer("Server=.;Database=ChatApp;User ID=sa; Password=613273;");
             }
         }
-        //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -58,17 +56,17 @@ namespace Nazli.DataLayer.Entity
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_ComplainStatusID_ComplainStatusID");
 
-                entity.HasOne(d => d.ComplainantUser)
-                    .WithMany(p => p.ComplainComplainantUsers)
-                    .HasForeignKey(d => d.ComplainantUserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_ComplainantUserID_UserID");
-
                 entity.HasOne(d => d.ComplainedOfUser)
-                    .WithMany(p => p.ComplainComplainedOfUsers)
+                    .WithMany(p => p.Complains)
                     .HasForeignKey(d => d.ComplainedOfUserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_ComplainedOfUserID_UserID");
+
+                entity.HasOne(d => d.MessageReference)
+                    .WithMany(p => p.Complains)
+                    .HasForeignKey(d => d.MessageReferenceId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_ComplainMessageReferenceID_MessageId");
             });
 
             modelBuilder.Entity<ComplainStatus>(entity =>

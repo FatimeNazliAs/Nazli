@@ -1,10 +1,9 @@
-﻿using Nazli.Common.DataLayer.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace Nazli.DataLayer.Entity
 {
-    public partial class GroupMember 
+    public partial class GroupMember
     {
         public int GroupMemberId { get; set; }
         public int GroupId { get; set; }
@@ -16,7 +15,5 @@ namespace Nazli.DataLayer.Entity
         public virtual User AddedUser { get; set; } = null!;
         public virtual Group Group { get; set; } = null!;
         public virtual User User { get; set; } = null!;
-
-
     }
 }

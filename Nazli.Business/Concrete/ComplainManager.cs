@@ -149,29 +149,41 @@ namespace Nazli.Business.Concrete
             return new BCResponse() { Errors = "Sistem Hatası" };
         }
        
-        
-        
-        
-        
-        
+ 
         public BCResponse GetById(int id)
         {
-            //return chatAppContext.Set<Complain>().FirstOrDefault(x => x.ComplainId == id);
-            throw new NotImplementedException();
+            
+            var result = _dalComplain.GetById(id);
+
+            if (result != null)
+            {
+                return new BCResponse() { Value = result };
+            }
+
+            return new BCResponse() { Errors = "Kullanıcı Bulunamadı" };
         }
 
         public BCResponse GetComplainByUserID(int id)
         {
-            //return chatAppContext.Set<Complain>().
-            //        Where(x => x.ComplainedOfUserId == id).
-            //        ToList();
-            throw new NotImplementedException();
+            var result = _dalComplain.GetComplainByUserID(id);
+
+            if (result != null)
+            {
+                return new BCResponse() { Value = result };
+            }
+
+            return new BCResponse() { Errors = "Kullanıcı Bulunamadı" };
         }
 
         public BCResponse GetListAll()
         {
-            //return chatAppContext.Set<Complain>().ToList();
-            throw new NotImplementedException();
+           
+            var result = _dalComplain.GetListAll();
+            if (result.Count > 0)
+            {
+                return new BCResponse() { Value = result };
+            }
+            return new BCResponse() { Errors = "Kayıt Bulunamadı" };
         }
 
 

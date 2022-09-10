@@ -1,10 +1,9 @@
-﻿using Nazli.Common.DataLayer.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace Nazli.DataLayer.Entity
 {
-    public partial class Friend 
+    public partial class Friend
     {
         public int FriendId { get; set; }
         public int RequesterUserId { get; set; }

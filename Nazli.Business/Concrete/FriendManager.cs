@@ -23,39 +23,49 @@ namespace Nazli.Business.Concrete
             _dalFriend = dalFriend;
         }
 
-
-
         public BCResponse Add(FriendDto dto)
         {
             #region Business
-            var isExists = _dalFriend.Any(friendId: dto.FriendId);
-            if (isExists)
+            var result = 0;
+            Friend? requestSentBefore = _dalFriend.GetFriend(from: dto.RequesterUserId, to: dto.RequestedUserId);
+
+            if(requestSentBefore != null && requestSentBefore.FriendStatusId==2)
             {
-                return new BCResponse() { Errors = "Kisi ile zaten arkadassınız." };
+                return new BCResponse() { Errors = "Arkadaslık istegi önceden kabul edilmiş." };
 
             }
 
+            if(requestSentBefore!=null && requestSentBefore.FriendStatusId == 1)
+            {
+                requestSentBefore.FriendStatusId = 2;
+                result = _dalFriend.Update(requestSentBefore);
+                if (result>0)
+                {
+                    return new BCResponse() { Value = result };
+
+                }
+                return new BCResponse() { Errors = "Sistem Hatasi" };
+            }
             #endregion
             #region Map To Entity
-            Friend entity=new Friend();
-            entity.FriendId = dto.FriendId;
-            entity.RequesterUserId=dto.RequesterUserId;
-            entity.RequestedUserId=dto.RequestedUserId;
-            entity.FriendStatusId=dto.FriendStatusId;
-            entity.RequestedDate=dto.RequestedDate;
-
+            Friend newFriend = new Friend();
+            newFriend.RequesterUserId = dto.RequesterUserId;
+            newFriend.RequestedUserId = dto.RequestedUserId;
+            newFriend.FriendStatusId = dto.FriendStatusId;
+            newFriend.RequestedDate = dto.RequestedDate;
             #endregion
             
-            #region Update
-            var result = _dalFriend.Add(entity);
-            if (result > 0)
+            #region Insert
+            result = _dalFriend.Add(newFriend);
+            if (result>0)
             {
-
                 return new BCResponse() { Value = result };
 
             }
+            return new BCResponse() { Errors = "Sistem Hatasi" };
             #endregion
-            return new BCResponse() { Errors = "Sistem Hatası" };
+
+
         }
 
         public BCResponse Delete(int id)
@@ -77,7 +87,6 @@ namespace Nazli.Business.Concrete
 
             }
 
-
             #endregion
             return new BCResponse() { Errors = "Kullanıcı silinemedi" };
         }
@@ -94,7 +103,7 @@ namespace Nazli.Business.Concrete
            
             
             #region Map To Entity
-            Friend? entity = _dalFriend.GetBy(friendId:dto.FriendId);
+            Friend? entity = _dalFriend.GetById(friendId:dto.FriendId);
             if (entity == null)
             {
                 return new BCResponse() { Errors = "arkadaş bulunamadı" };
@@ -123,10 +132,13 @@ namespace Nazli.Business.Concrete
 
         public BCResponse GetById(int id)
         {
-            throw new NotImplementedException();
-            //return chatAppContext.Set<Friend>()
-            //                     .Where(x => x.FriendId == id)
-            //                     .ToList();
+            var result = _dalFriend.GetById(id);
+            if (result != null)
+            {
+                return new BCResponse() { Value = result };
+
+            }
+            return new BCResponse() { Errors = "Bu id'ye ait arkadas bulunamadı" };
         }
 
       

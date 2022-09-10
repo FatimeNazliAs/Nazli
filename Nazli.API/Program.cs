@@ -19,6 +19,18 @@ builder.Services.AddScoped<UserManager>();
 
 builder.Services.AddScoped<DalMessage>();
 builder.Services.AddScoped<MessageManager>();
+
+builder.Services.AddScoped<DalGroup>();
+builder.Services.AddScoped<GroupManager>();
+
+builder.Services.AddScoped<DalGroupMember>();
+builder.Services.AddScoped<GroupMemberManager>();
+
+builder.Services.AddScoped<DalFriend>();
+builder.Services.AddScoped<FriendManager>();
+
+builder.Services.AddScoped<DalComplain>();
+builder.Services.AddScoped<ComplainManager>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

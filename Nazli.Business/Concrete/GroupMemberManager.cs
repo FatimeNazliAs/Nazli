@@ -31,7 +31,11 @@ namespace Nazli.Business.Concrete
 
             }
             #endregion
-
+          //  isExists = _dalGroupMember.DeleteGroup(createrUserId: dto.CreaterUserId);
+            
+            
+            
+            
             #region Map To Entity
             GroupMember entity =new GroupMember();
             entity.GroupMemberId=dto.GroupMemberId;
@@ -89,8 +93,13 @@ namespace Nazli.Business.Concrete
 
         public BCResponse GetById(int id)
         {
-            throw new NotImplementedException();
-            //return chatAppContext.Set<GroupMember>().ToList();
+            var result = _dalGroupMember.GetById(id);
+            if (result != null)
+            {
+                return new BCResponse() { Value = result };
+
+            }
+            return new BCResponse() { Errors = "Bu id'ye ait grup üyesi bulunamadı" };
 
         }
     }

@@ -92,33 +92,29 @@ namespace Nazli.Business.Concrete
         
         public BCResponse SendMessage(MessageDto message) // TEKRAR BAK! 
         {
-            // throw new NotImplementedException();
-
-            //MessageDto dto;
+            
             #region Business
             var senderResult = _dalMessage.GetBy(senderId: message.SenderId);
             var receiverResult= _dalMessage.GetBy(receiverId: message.ReceiverId);
             
-            if (senderResult == null )
-            {
+            //if (senderResult == null )
+            //{
                 
                 
-                if (receiverResult != null)
-                {
-                    return new BCResponse() { Errors = "Gonderici bulunamadı" };
+            //    if (receiverResult != null)
+            //    {
+            //        return new BCResponse() { Errors = "Gonderici bulunamadı" };
                     
 
-                }
-                else
-                {
-                    return new BCResponse() { Errors = "Gonderici ve Alıcı bulunamadı" };
-                }
+            //    }
+            //    else
+            //    {
+            //        return new BCResponse() { Errors = "Gonderici ve Alıcı bulunamadı" };
+            //    }
 
 
-            }
+            //}
 
-
-            
             var groupResult = _dalMessage.GetBy(groupId: message.GroupId);
 
             if ((groupResult == null && senderResult == null) || (groupResult == null && senderResult!= null))
@@ -131,8 +127,7 @@ namespace Nazli.Business.Concrete
 
             Message entity = new Message();
             entity.SenderId = message.SenderId;
-            entity.ReceiverId=message.ReceiverId;
-            entity.MessageReferenceId=message.MessageReferenceId;
+            entity.ReceiverId=message.ReceiverId;       
             entity.GroupId= message.GroupId;
             entity.MessageContent = message.MessageContent;
             entity.SendDate= message.SendDate;

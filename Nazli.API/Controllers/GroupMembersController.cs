@@ -19,7 +19,7 @@ namespace Nazli.API.Controllers
             _groupMemberManager = groupMemberManager;
         }
 
-        [HttpPost]
+        [HttpPost("Add")]
         public IActionResult Add([FromBody] GroupMemberDto groupMember)
         {
             var result = _groupMemberManager.Add(groupMember);
@@ -31,7 +31,7 @@ namespace Nazli.API.Controllers
             return Ok(result.Value);
         }
 
-        [HttpPut]
+        [HttpPut("Update")]
         public IActionResult Update([FromBody] GroupMemberDto groupMember)
         {
             var result = _groupMemberManager.Update(groupMember);
@@ -42,7 +42,7 @@ namespace Nazli.API.Controllers
             }
             return Ok(result.Value);
         }
-        [HttpDelete]
+        [HttpDelete("Delete")]
         public IActionResult Delete(int groupId)
         {
             var result = _groupMemberManager.Delete(groupId);
@@ -54,7 +54,7 @@ namespace Nazli.API.Controllers
             return Ok(result.Value);
         }
 
-        [HttpGet]
+        [HttpGet("GetById/{groupId}")]
         public IActionResult GetById(int groupId)
         {
             var result = _groupMemberManager.GetById(groupId);

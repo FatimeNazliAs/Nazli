@@ -30,7 +30,7 @@ namespace Nazli.DataLayer
 
         }
 
-        public Friend? GetBy(int? friendId = null, int? requesterUserId = null, int? requestedUserId = null, byte? friendStatusId = null)
+        public Friend? GetById(int? friendId = null, int? requesterUserId = null, int? requestedUserId = null, byte? friendStatusId = null)
         {
 
             return chatAppContext.Friends
@@ -47,5 +47,11 @@ namespace Nazli.DataLayer
         
         }
 
+        public Friend? GetFriend(int ? from ,int? to)
+        {
+            return chatAppContext.
+                Friends.
+                FirstOrDefault(c => (c.RequesterUserId == to && c.RequestedUserId == from));
+        }
     }
 }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace Nazli.DataLayer
 {
@@ -30,7 +31,7 @@ namespace Nazli.DataLayer
                             );
         }
 
-        public Group? GetBy(int? id = null, int? createrUserId = null, string? name = null)
+        public Group? GetById(int? id = null, int? createrUserId = null, string? name = null)
         {
 
             return chatAppContext.Groups.
@@ -40,5 +41,8 @@ namespace Nazli.DataLayer
                             (string.IsNullOrEmpty(name) || x.Name == name)).FirstOrDefault();
 
         }
+
+      
+
     }
 }

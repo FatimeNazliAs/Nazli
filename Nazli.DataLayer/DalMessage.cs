@@ -33,21 +33,21 @@ namespace Nazli.DataLayer
         }
 
 
-        public bool Any(int? messageId = null,int? senderId=null, int? receiverId=null, int? messageReferenceId=null)
+        public bool Any(int? messageId = null,int? senderId=null, int? receiverId=null)
         {
 
             return chatAppContext.Messages.
                 Any(x =>
                             (!messageId.HasValue || x.MessageId == messageId) &&
                             (!senderId.HasValue || x.SenderId == senderId) &&
-                            (!receiverId.HasValue || x.ReceiverId== receiverId)&&
-                            (!messageReferenceId.HasValue || x.MessageReferenceId == messageReferenceId));
+                            (!receiverId.HasValue || x.ReceiverId == receiverId));
+                           // (!messageReferenceId.HasValue || x.MessageReferenceId == messageReferenceId));
 
 
 
         }
 
-        public Message? GetBy(int? messageId = null, int? senderId = null, int? receiverId = null, int? groupId=null, int? messageReferenceId = null)
+        public Message? GetBy(int? messageId = null, int? senderId = null, int? receiverId = null, int? groupId=null)
         {
 
             return chatAppContext.Messages.
@@ -55,9 +55,9 @@ namespace Nazli.DataLayer
                             (!messageId.HasValue || x.MessageId == messageId) &&
                             (!senderId.HasValue || x.SenderId == senderId) &&
                             (!receiverId.HasValue || x.ReceiverId == receiverId) &&
-                            (!groupId.HasValue || x.GroupId == groupId) &&
-                            (!messageReferenceId.HasValue || x.MessageReferenceId == messageReferenceId)
-                            ).FirstOrDefault();
+                            (!groupId.HasValue || x.GroupId == groupId)).FirstOrDefault();
+                        
+
 
         }
 

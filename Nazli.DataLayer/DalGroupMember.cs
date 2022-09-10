@@ -40,6 +40,16 @@ namespace Nazli.DataLayer
             
 
         }
+        
+        public bool DeleteGroup(int? createrUserId = null)
+        {
+            return chatAppContext.Groups.
+               Any(x =>
+
+                           (!createrUserId.HasValue || x.CreaterUserId == createrUserId));
+
+
+        }
 
     }
 }

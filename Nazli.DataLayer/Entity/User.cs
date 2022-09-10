@@ -1,15 +1,13 @@
-﻿using Nazli.Common.DataLayer.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace Nazli.DataLayer.Entity
 {
-    public partial class User 
+    public partial class User
     {
         public User()
         {
-            ComplainComplainantUsers = new HashSet<Complain>();
-            ComplainComplainedOfUsers = new HashSet<Complain>();
+            Complains = new HashSet<Complain>();
             GroupMemberAddedUsers = new HashSet<GroupMember>();
             GroupMemberUsers = new HashSet<GroupMember>();
             Groups = new HashSet<Group>();
@@ -30,8 +28,7 @@ namespace Nazli.DataLayer.Entity
 
         public virtual Friend FriendRequestedUser { get; set; } = null!;
         public virtual Friend FriendRequesterUser { get; set; } = null!;
-        public virtual ICollection<Complain> ComplainComplainantUsers { get; set; }
-        public virtual ICollection<Complain> ComplainComplainedOfUsers { get; set; }
+        public virtual ICollection<Complain> Complains { get; set; }
         public virtual ICollection<GroupMember> GroupMemberAddedUsers { get; set; }
         public virtual ICollection<GroupMember> GroupMemberUsers { get; set; }
         public virtual ICollection<Group> Groups { get; set; }
