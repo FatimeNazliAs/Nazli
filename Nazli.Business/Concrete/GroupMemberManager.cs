@@ -95,7 +95,33 @@ namespace Nazli.Business.Concrete
 
         public BCResponse Update(GroupMemberDto dto)
         {
-            throw new NotImplementedException();
+            
+            var userExists = _dalGroupMember.Any(userId: dto.UserId);
+            if (!userExists)
+            {
+                return new BCResponse() { Errors = "Kullanıcı bulunamadı" };
+
+            }
+
+            #region Map To Entity
+            GroupMember entity = new GroupMember();
+            entity.GroupMemberId = dto.GroupMemberId;
+            entity.GroupId = dto.GroupId;
+            entity.UserId = dto.UserId;
+            entity.AddedUserId = dto.AddedUserId;
+            entity.AddedDate = dto.AddedDate;
+            entity.IsAdmin = dto.IsAdmin;
+            #endregion
+
+
+            var result = _dalGroupMember.Update(entity);
+            if (result > 0)
+            {
+                return new BCResponse() { Value = result };
+            }
+
+            return new BCResponse() { Errors = "Sistem Hatası" };
+
 
         }
 

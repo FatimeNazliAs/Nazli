@@ -17,17 +17,7 @@ namespace Nazli.API.Controllers
             _friendManager = friendManager;
         }
 
-        //[HttpPost("Add")]
-        //public IActionResult Add([FromBody]  FriendDto friend)
-        //{
-        //    var result = _friendManager.Add(friend);
-        //    if (result.Errors!=null)
-        //    {
-        //        return BadRequest(result.Errors);   
-
-        //    }
-        //    return Ok(result.Value);
-        //}
+      
         [HttpPost("Add")]
         public IActionResult Add([FromBody] FriendDto dto)//değiştirdik
         {

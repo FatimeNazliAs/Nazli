@@ -39,23 +39,11 @@ namespace Nazli.Business.Concrete
 
             }
 
-            //var complainedExists = _dalComplain.Any(complainedOfUserId: dto.ComplainedOfUserId);
-            //if (complainedExists)
+            //var complainStatusExists = _dalComplain.Any(complainStatusId: dto.ComplainStatusId);
+            //if (!complainStatusExists)
             //{
-            //    return new BCResponse() { Errors = "Sikayet edilen kişi sistemde kayıtlıdır." };
-
+            //    return new BCResponse() { Errors = "Sikayet edilme nedeni sistemde kayıtlıdır." };
             //}
-            //var complainantUserExists = _dalComplain.Any(complainantUserId: dto.ComplainantUserId);
-            //if (complainantUserExists)
-            //{
-            //    return new BCResponse() { Errors = "Sikayetçi kişi sistemde kayıtlıdır." };
-
-            //}
-            var complainStatusExists = _dalComplain.Any(complainStatusId: dto.ComplainStatusId);
-            if (!complainStatusExists)
-            {
-                return new BCResponse() { Errors = "Sikayet edilme nedeni sistemde kayıtlıdır." };
-            }
             #endregion
 
             #region Map To Entity

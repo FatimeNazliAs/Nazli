@@ -95,10 +95,10 @@ namespace Nazli.Business.Concrete
         {
 
             #region Business
-            if (dto.FriendId <= 0)
-            {
-                return new BCResponse() { Errors = "hatalı veri" };
-            }
+            //if (dto.FriendId <= 0)
+            //{
+            //    return new BCResponse() { Errors = "hatalı veri" };
+            //}
             #endregion
            
             

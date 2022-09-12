@@ -65,7 +65,7 @@ namespace Nazli.Business.Concrete
         
         public BCResponse GetGroupMessage(int SenderId, int GroupId)
         {
-            var isExistGroup = _dalMessage.getMember(userId: SenderId, groupId: GroupId);
+            var isExistGroup = _dalMessage.GetMember(userId: SenderId, groupId: GroupId);
 
 
             if (isExistGroup != null)
@@ -111,7 +111,7 @@ namespace Nazli.Business.Concrete
             }
             else if (message.ReceiverId == 0)
             {
-                var isGroup = _dalMessage.getMember(userId: message.SenderId, groupId: message.GroupId);
+                var isGroup = _dalMessage.GetMember(userId: message.SenderId, groupId: message.GroupId);
                 if (isGroup == null)
                 {
                     return new BCResponse() { Errors = "Grupta olmayan kullanıcı gruba mesaj gönderemez" };

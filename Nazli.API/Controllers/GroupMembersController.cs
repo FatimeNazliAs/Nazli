@@ -43,9 +43,9 @@ namespace Nazli.API.Controllers
             return Ok(result.Value);
         }
         [HttpDelete("Delete")]
-        public IActionResult Delete(int groupId)
+        public IActionResult Delete(int groupMemberId)
         {
-            var result = _groupMemberManager.Delete(groupId);
+            var result = _groupMemberManager.Delete(groupMemberId);
             if (result.Errors != null)
             {
                 return BadRequest(result.Errors);

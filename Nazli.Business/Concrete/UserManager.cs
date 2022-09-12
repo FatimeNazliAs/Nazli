@@ -188,7 +188,7 @@ namespace Nazli.Business.Concrete
                 return new BCResponse() { Value = result };
 
             }
-            return new BCResponse() { Errors = "Bu kullanıcı ismine ait kullanıcı bulunamadı" };
+            return new BCResponse() { Errors = "Bu isme ait kullanıcı bulunamadı" };
         }
 
 

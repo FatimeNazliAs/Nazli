@@ -61,66 +61,18 @@ namespace Nazli.DataLayer
 
         }
 
-    //    public int GetMember(int? userId = null, int? groupId = null)
-        //{
-
-        //    var user = chatAppContext.GroupMembers.
-        //         Where(x =>
-        //                     (!userId.HasValue || x.UserId == userId)
-        //                     ).FirstOrDefault();
-        //    var group = chatAppContext.Messages.
-        //        Where(x =>
-        //                    (!groupId.HasValue || x.GroupId == groupId)
-        //                    ).FirstOrDefault();
-
-        //    if (user != null && group != null)
-        //    {
-        //        return 1;
-        //    }
-        //    else
-        //    {
-        //        return 0;
-        //    }
-
-        //}
-
-        
-
-        //public int getMember(int? senderId = null, int? groupId = null)
-        //{
-        //    var sender = chatAppContext.Messages.
-        //       Where(x =>
-        //                   (!senderId.HasValue || x.SenderId == senderId)
-        //                   ).FirstOrDefault();
-
-        //    var group = chatAppContext.GroupMembers.
-        //        Where(x =>
-        //                    (!groupId.HasValue || x.GroupId == groupId)
-        //                    ).FirstOrDefault();
-
-
-
-        //    if (sender != null && group != null)
-        //    {
-        //        return 1;
-        //    }
-        //    else
-        //    {
-        //        return 0;
-        //    }
-
-        //}
-
-        public GroupMember? getMember(int? userId,int? groupId)
+   
+        public GroupMember? GetMember(int? userId,int? groupId)
         {
             return chatAppContext.GroupMembers
-                .FirstOrDefault(c=>c.UserId==userId && c.GroupId==groupId);
+              .FirstOrDefault(c=>c.UserId==userId && c.GroupId==groupId);
+               //.FirstOrDefault(c => c.UserId == groupId && c.GroupId == userId);
         }
         public Friend? GetFriend(int? senderId = null, int? receiverId = null)
         {
             return chatAppContext.
-                Friends.
-                FirstOrDefault(c => c.RequesterUserId == senderId && c.RequestedUserId == receiverId);
+                Friends.              
+                 FirstOrDefault(c => c.RequesterUserId == receiverId && c.RequestedUserId == senderId);
         }
 
     }

@@ -48,7 +48,7 @@ namespace Nazli.API.Controllers
             return Ok(result.Value);
         }
 
-        [HttpGet("user/{senderId}/groupchat/{receiverId}")] 
+        [HttpGet("user/{senderId}/groupchat/{receiverId}/Message")] 
         public IActionResult GetPrivateMessage(int senderId, int receiverId)
         {
             var result = _messageManager.GetPrivateMessage(senderId, receiverId);

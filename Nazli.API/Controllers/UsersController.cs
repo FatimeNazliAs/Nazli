@@ -72,17 +72,18 @@ namespace Nazli.API.Controllers
             return Ok(result.Value);
         }
 
-        [HttpGet("GetByUserName/{username}")]
+        [HttpGet("GetByUserName/{userName}")]
 
         public IActionResult GetByUserName(string userName)
         {
             var result = _userManager.GetByUserName(userName);
-            if (result.Errors != null)
+            if (result.Errors == null)
             {
-                return NotFound(result.Errors);
+                return Ok(result.Value);
+                
 
             }
-            return Ok(result.Value);
+            return NotFound(result.Errors);
         }
 
 
