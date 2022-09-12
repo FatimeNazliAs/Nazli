@@ -14,9 +14,9 @@ namespace Nazli.Common.DTOs
         public int MessageId { get; set; }
         [Required()]
         public int SenderId { get; set; }
-        [Required()]
+
         public int? ReceiverId { get; set; }
-        [Required()]
+      
 
         public int? GroupId { get; set; }
         [Required()]
@@ -25,7 +25,7 @@ namespace Nazli.Common.DTOs
         public DateTime SendDate { get; set; }
         [Required()]
         public DateTime ReadDate { get; set; }
-        [Required()]
+      
 
 
 

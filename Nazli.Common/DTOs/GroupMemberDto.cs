@@ -23,7 +23,7 @@ namespace Nazli.Common.DTOs
         public DateTime AddedDate { get; set; }
         [Required()]
         public bool IsAdmin { get; set; }
-        [Required()]
+    
 
 
 

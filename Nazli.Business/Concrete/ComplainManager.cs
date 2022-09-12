@@ -17,6 +17,7 @@ namespace Nazli.Business.Concrete
 
 
         DalComplain _dalComplain;
+
      
         public ComplainManager(DalComplain dalComplain)
         {
@@ -29,45 +30,44 @@ namespace Nazli.Business.Concrete
 
         public BCResponse Add(ComplainDto dto)
         {
-
-      
             #region Business
             
             var isExists = _dalComplain.FindMessage(messageId: dto.MessageReferenceId);
-            if (!isExists)
+            if (isExists==null)
             {
                 return new BCResponse() { Errors = "Mesajlaşma yoktur." };
 
             }
 
-            isExists = _dalComplain.Any(complainedOfUserId: dto.ComplainedOfUserId);
-            if (isExists)
-            {
-                return new BCResponse() { Errors = "Sikayet edilen kişi sistemde kayıtlıdır." };
+            //var complainedExists = _dalComplain.Any(complainedOfUserId: dto.ComplainedOfUserId);
+            //if (complainedExists)
+            //{
+            //    return new BCResponse() { Errors = "Sikayet edilen kişi sistemde kayıtlıdır." };
 
-            }
-             isExists = _dalComplain.Any(complainantUserId: dto.ComplainantUserId);
-            if (isExists )
-            {
-                return new BCResponse() { Errors = "Sikayetçi kişi sistemde kayıtlıdır." };
+            //}
+            //var complainantUserExists = _dalComplain.Any(complainantUserId: dto.ComplainantUserId);
+            //if (complainantUserExists)
+            //{
+            //    return new BCResponse() { Errors = "Sikayetçi kişi sistemde kayıtlıdır." };
 
-            }
-            isExists = _dalComplain.Any(complainStatusId: dto.ComplainStatusId);
-            if (isExists)
+            //}
+            var complainStatusExists = _dalComplain.Any(complainStatusId: dto.ComplainStatusId);
+            if (!complainStatusExists)
             {
                 return new BCResponse() { Errors = "Sikayet edilme nedeni sistemde kayıtlıdır." };
             }
             #endregion
-            
+
             #region Map To Entity
             Complain entity = new Complain();
             entity.ComplainantUserId = dto.ComplainantUserId;
             entity.ComplainStatusId = dto.ComplainStatusId;
             entity.ComplainedOfUserId=dto.ComplainedOfUserId;
             entity.ComplainDate=dto.ComplainDate;
+            entity.MessageReferenceId = dto.MessageReferenceId;
             #endregion
-           
-            
+
+
             #region Add
             var result = _dalComplain.Add(entity);
             if (result>0)

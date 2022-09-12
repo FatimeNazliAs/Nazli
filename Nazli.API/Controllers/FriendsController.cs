@@ -17,16 +17,27 @@ namespace Nazli.API.Controllers
             _friendManager = friendManager;
         }
 
+        //[HttpPost("Add")]
+        //public IActionResult Add([FromBody]  FriendDto friend)
+        //{
+        //    var result = _friendManager.Add(friend);
+        //    if (result.Errors!=null)
+        //    {
+        //        return BadRequest(result.Errors);   
+
+        //    }
+        //    return Ok(result.Value);
+        //}
         [HttpPost("Add")]
-        public IActionResult Add([FromBody]  FriendDto friend)
+        public IActionResult Add([FromBody] FriendDto dto)//değiştirdik
         {
-            var result = _friendManager.Add(friend);
-            if (result.Errors!=null)
+            var result = _friendManager.Add(dto);
+            if (result.Errors == null)
             {
-                return BadRequest(result.Errors);   
+                return Ok(result.Value);
 
             }
-            return Ok(result.Value);
+            return NotFound(result.Errors);
         }
 
         [HttpPut("Update")]

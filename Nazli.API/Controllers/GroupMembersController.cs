@@ -55,9 +55,9 @@ namespace Nazli.API.Controllers
         }
 
         [HttpGet("GetById/{groupId}")]
-        public IActionResult GetById(int groupId)
+        public IActionResult GetBy(int groupId)
         {
-            var result = _groupMemberManager.GetById(groupId);
+            var result = _groupMemberManager.GetBy(groupId);
             if (result.Errors != null)
             {
                 return BadRequest(result.Errors);

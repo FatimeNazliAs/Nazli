@@ -23,44 +23,52 @@ namespace Nazli.Business.Concrete
 
         public BCResponse Add(GroupMemberDto dto)
         {
+
             #region Business
             var isExists = _dalGroupMember.Any(groupMemberId: dto.GroupMemberId);
             if (isExists)
             {
-                return new BCResponse() { Errors = "Kişi grupta var olmaktadır." };
+                return new BCResponse() { Errors = "Kişiyi tekrar ekleyemezsiniz,kişi zaten grupta bulunmaktadır." };
 
             }
-            #endregion
-          //  isExists = _dalGroupMember.DeleteGroup(createrUserId: dto.CreaterUserId);
-            
-            
-            
-            
-            #region Map To Entity
-            GroupMember entity =new GroupMember();
-            entity.GroupMemberId=dto.GroupMemberId;
-            entity.GroupId=dto.GroupId;
-            entity.UserId=dto.UserId;
-            entity.AddedUserId=dto.AddedUserId;
-            entity.AddedDate=dto.AddedDate;
-            entity.IsAdmin=dto.IsAdmin;
-            #endregion
 
-            #region Insert
-            if (entity.AddedUserId < 0)
+            var adminExists = _dalGroupMember.Any(userId: dto.UserId, groupId: dto.GroupId);
+
+            if (adminExists)
             {
-                var result = _dalGroupMember.Add(entity);
-                if (result > 0)
+                if (dto.IsAdmin == true)
                 {
-                    return new BCResponse() { Value = result };
+                    return new BCResponse() { Value = "Grup yöneticisisin, kişi ekleyebilir ve grup resmini değiştirebilirsin" };
                 }
 
-                return new BCResponse() { Errors = "Sistem Hatası" };
+                return new BCResponse() { Value = "Grupta yönetici değil üyesiniz." };
+
+
             }
 
-            return new BCResponse() { Errors = "Gereklilikler sağlanamadı" };
 
             #endregion
+
+            #region Map To Entity
+            GroupMember entity = new GroupMember();
+            entity.GroupMemberId = dto.GroupMemberId;
+            entity.GroupId = dto.GroupId;
+            entity.UserId = dto.UserId;
+            entity.AddedUserId = dto.AddedUserId;
+            entity.AddedDate = dto.AddedDate;
+            entity.IsAdmin = dto.IsAdmin;
+            #endregion
+
+
+            var result = _dalGroupMember.Add(entity);
+            if (result > 0)
+            {
+                return new BCResponse() { Value = result };
+            }
+
+            return new BCResponse() { Errors = "Sistem Hatası" };
+
+
 
 
         }
@@ -91,9 +99,9 @@ namespace Nazli.Business.Concrete
 
         }
 
-        public BCResponse GetById(int id)
+        public BCResponse GetBy(int id)
         {
-            var result = _dalGroupMember.GetById(id);
+            var result = _dalGroupMember.GetBy(id);
             if (result != null)
             {
                 return new BCResponse() { Value = result };

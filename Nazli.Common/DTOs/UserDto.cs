@@ -33,7 +33,7 @@ namespace Nazli.Common.DTOs
         public bool IsActive { get; set; }
         [Required()]
         public bool IsAdmin { get; set; }
-        [Required()]
+     
 
 
     }

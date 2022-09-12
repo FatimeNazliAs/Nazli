@@ -43,7 +43,7 @@ namespace Nazli.DataLayer
                             (!complainedOfUserId.HasValue || x.ComplainedOfUserId== complainedOfUserId)&&
                             (!complainantUserId.HasValue || x.ComplainantUserId == complainantUserId)&&
                             (!complainStatusId.HasValue || x.ComplainStatusId == complainStatusId));
-                        //  (string.IsNullOrEmpty(userName) || x.Username == userName)
+                     
 
 
         }
@@ -62,13 +62,17 @@ namespace Nazli.DataLayer
         }
 
 
-        public bool FindMessage(int? messageId = null)
+        public Message? FindMessage(int? messageId = null)
         {
 
-            return chatAppContext.Messages.
-                Any(x =>
-                            (!messageId.HasValue || x.MessageId == messageId));
-                           
+            //return chatAppContext.Messages.
+            //    FirstOrDefault(x =>
+            //                (!messageId.HasValue || x.MessageId == messageId));
+
+            return chatAppContext.Messages.Find(messageId);
+
+
+
         }
 
     }

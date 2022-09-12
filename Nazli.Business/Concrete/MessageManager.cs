@@ -65,90 +65,82 @@ namespace Nazli.Business.Concrete
         
         public BCResponse GetGroupMessage(int SenderId, int GroupId)
         {
-            var groupResult = _dalMessage.GetBy(groupId: GroupId);
-            var senderResult = _dalMessage.GetBy(senderId: SenderId);
+            var isExistGroup = _dalMessage.getMember(userId: SenderId, groupId: GroupId);
 
 
-            if ( groupResult != null && senderResult != null)
+            if (isExistGroup != null)
             {
-                return new BCResponse() { Value = senderResult };
+                return new BCResponse() { Value = isExistGroup };
             }
-            return new BCResponse() { Errors = "Grup Mesajı alınamadı" };
+            return new BCResponse() { Errors = "Group Mesajı alınamadı" };
         }
 
         public BCResponse GetPrivateMessage(int SenderId, int ReceiverId)
         {
             var senderResult = _dalMessage.GetBy(senderId: SenderId);
             var receiverResult = _dalMessage.GetBy(receiverId: ReceiverId);
-            
 
-            if ((senderResult != null && receiverResult == null) || (senderResult != null && receiverResult != null))
+
+            if (senderResult != null && receiverResult != null)
             {
                 return new BCResponse() { Value = senderResult };
             }
-            return new BCResponse() { Errors = "Mesaj alınamadı" };
+            return new BCResponse() { Errors = "İki kişi arasında mesaj bulunamadı." };
         }
 
         
         public BCResponse SendMessage(MessageDto message) // TEKRAR BAK! 
         {
-            
             #region Business
-            var senderResult = _dalMessage.GetBy(senderId: message.SenderId);
-            var receiverResult= _dalMessage.GetBy(receiverId: message.ReceiverId);
-            
-            //if (senderResult == null )
-            //{
-                
-                
-            //    if (receiverResult != null)
-            //    {
-            //        return new BCResponse() { Errors = "Gonderici bulunamadı" };
-                    
+            Message newMessage = new Message();
+         
 
-            //    }
-            //    else
-            //    {
-            //        return new BCResponse() { Errors = "Gonderici ve Alıcı bulunamadı" };
-            //    }
-
-
-            //}
-
-            var groupResult = _dalMessage.GetBy(groupId: message.GroupId);
-
-            if ((groupResult == null && senderResult == null) || (groupResult == null && senderResult!= null))
+            if (message.GroupId == 0)
             {
-                return new BCResponse() { Errors = "Grup mesajı yok" };
-
-            }
-            #endregion
-            #region Map to Entity
-
-            Message entity = new Message();
-            entity.SenderId = message.SenderId;
-            entity.ReceiverId=message.ReceiverId;       
-            entity.GroupId= message.GroupId;
-            entity.MessageContent = message.MessageContent;
-            entity.SendDate= message.SendDate;
-            entity.ReadDate= message.ReadDate;
-
-            #endregion
-
-
-            if((senderResult!=null && receiverResult!=null) || (senderResult != null && receiverResult == null))
-            {
-                var result = _dalMessage.SendMessage(entity);
-                if (result !=null)
+                var isFriend = _dalMessage.GetFriend(senderId: message.SenderId, receiverId: message.ReceiverId);
+                if (isFriend == null)
                 {
-                    return new BCResponse() { Value = result };
+                    return new BCResponse() { Errors = "Arkadaş olunmayan kişiye mesaj gönderilemez." };
                 }
 
-                return new BCResponse() { Errors = "Sistem Hatası" };
+                newMessage.SenderId = message.SenderId;
+                newMessage.ReceiverId = message.ReceiverId;
+                newMessage.MessageContent = message.MessageContent;
+                newMessage.SendDate = message.SendDate;
+                newMessage.ReadDate = message.ReadDate;
+            }
+            else if (message.ReceiverId == 0)
+            {
+                var isGroup = _dalMessage.getMember(userId: message.SenderId, groupId: message.GroupId);
+                if (isGroup == null)
+                {
+                    return new BCResponse() { Errors = "Grupta olmayan kullanıcı gruba mesaj gönderemez" };
+                }
+                newMessage.SenderId = message.SenderId;
+                newMessage.GroupId = message.GroupId;
+                newMessage.MessageContent = message.MessageContent;
+                newMessage.SendDate = message.SendDate;
+                newMessage.ReadDate = message.ReadDate;
+
+            }
+            else
+            {
+                return new BCResponse() { Errors = "Mesaj aynı anda gruba ve kişiye gönderilemez." };
+
             }
 
-            return new BCResponse() { Errors = "Mesaj atmak için gereklilikler sağlanamadı" };
+            #endregion
 
+
+            #region Send Message
+            var result = _dalMessage.Add(newMessage);
+            if (result != 0)
+            {
+                return new BCResponse() { Value = result };
+            }
+
+            return new BCResponse() { Errors = "Sistem Hatası" };
+            #endregion
 
         }
 

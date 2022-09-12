@@ -18,7 +18,7 @@ namespace Nazli.Common.DTOs
         public byte FriendStatusId { get; set; }
         [Required()]
         public DateTime RequestedDate { get; set; }
-        [Required()]
+  
 
 
     }

@@ -29,7 +29,7 @@ namespace Nazli.DataLayer.Entity
         {
             if (!optionsBuilder.IsConfigured)
             {
-//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
                 optionsBuilder.UseSqlServer("Server=.;Database=ChatApp;User ID=sa; Password=613273;");
             }
         }
@@ -82,12 +82,6 @@ namespace Nazli.DataLayer.Entity
             {
                 entity.ToTable("Friend");
 
-                entity.HasIndex(e => e.RequestedUserId, "UK_RequestedUserID")
-                    .IsUnique();
-
-                entity.HasIndex(e => e.RequesterUserId, "UK_RequesterUserID")
-                    .IsUnique();
-
                 entity.Property(e => e.FriendId).HasColumnName("FriendID");
 
                 entity.Property(e => e.FriendStatusId).HasColumnName("FriendStatusID");
@@ -102,17 +96,17 @@ namespace Nazli.DataLayer.Entity
                     .WithMany(p => p.Friends)
                     .HasForeignKey(d => d.FriendStatusId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_FriendStatusID_FriendStatusID");
+                    .HasConstraintName("FK_Friend_FriendStatus");
 
                 entity.HasOne(d => d.RequestedUser)
-                    .WithOne(p => p.FriendRequestedUser)
-                    .HasForeignKey<Friend>(d => d.RequestedUserId)
+                    .WithMany(p => p.FriendRequestedUsers)
+                    .HasForeignKey(d => d.RequestedUserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_RequestedUserID_UserID");
 
                 entity.HasOne(d => d.RequesterUser)
-                    .WithOne(p => p.FriendRequesterUser)
-                    .HasForeignKey<Friend>(d => d.RequesterUserId)
+                    .WithMany(p => p.FriendRequesterUsers)
+                    .HasForeignKey(d => d.RequesterUserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_RequesterUserID_UserID");
             });

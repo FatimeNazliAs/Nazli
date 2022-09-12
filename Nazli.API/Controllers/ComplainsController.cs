@@ -21,12 +21,13 @@ namespace Nazli.API.Controllers
         public IActionResult Add([FromBody] ComplainDto dto)
         {
             var result = _complainManager.Add(dto);
-            if (result.Errors != null)
+            if (result.Errors == null)
             {
-                return NotFound(result.Value);
+                return Ok(result.Value);
+                
 
             }
-            return Ok(result.Errors);
+            return NotFound(result.Errors);
         }
         [HttpDelete("Delete")]
         public IActionResult Delete(int id)

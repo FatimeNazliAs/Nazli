@@ -8,6 +8,8 @@ namespace Nazli.DataLayer.Entity
         public User()
         {
             Complains = new HashSet<Complain>();
+            FriendRequestedUsers = new HashSet<Friend>();
+            FriendRequesterUsers = new HashSet<Friend>();
             GroupMemberAddedUsers = new HashSet<GroupMember>();
             GroupMemberUsers = new HashSet<GroupMember>();
             Groups = new HashSet<Group>();
@@ -26,9 +28,9 @@ namespace Nazli.DataLayer.Entity
         public bool IsActive { get; set; }
         public bool IsAdmin { get; set; }
 
-        public virtual Friend FriendRequestedUser { get; set; } = null!;
-        public virtual Friend FriendRequesterUser { get; set; } = null!;
         public virtual ICollection<Complain> Complains { get; set; }
+        public virtual ICollection<Friend> FriendRequestedUsers { get; set; }
+        public virtual ICollection<Friend> FriendRequesterUsers { get; set; }
         public virtual ICollection<GroupMember> GroupMemberAddedUsers { get; set; }
         public virtual ICollection<GroupMember> GroupMemberUsers { get; set; }
         public virtual ICollection<Group> Groups { get; set; }

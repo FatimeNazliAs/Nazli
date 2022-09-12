@@ -21,7 +21,7 @@ namespace Nazli.Common.DTOs
         public byte ComplainStatusId { get; set; }
         [Required()]
         public DateTime ComplainDate { get; set; }
-        [Required()]
+    
 
 
     }
